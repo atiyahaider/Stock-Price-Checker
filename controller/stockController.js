@@ -3,17 +3,24 @@ const Stock = require('../models/stock');
 const fetch = require('node-fetch');
 
 // url for api call to get stock price: https://api.iextrading.com/1.0/stock/goog/price
-const stockAPIUrl = 'https://api.iextrading.com/1.0/stock/';
+//const stockAPIUrl = 'https://api.iextrading.com/1.0/stock/';
+
+const stockAPIUrl = 'https://ws-api.iextrading.com/1.0/tops/last?symbols=';
 
 //Call API
 async function getPrice (stock, next) {
-  const url = stockAPIUrl + stock + '/price';
+  const url = stockAPIUrl + stock //+ '/price';
   try {
       let response = await fetch(url);
       if (response.status === 404)
         throw ({status: 404, message: 'Stock not found'});
-      let price = await response.json();
-      return price;
+
+      let data = await response.json();
+      if (data.length === 0)
+          throw ({status: 404, message: 'Stock not found'});
+
+      return data[0].price;
+    
   } catch(err) {
       next(err);
   }

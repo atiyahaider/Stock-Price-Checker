@@ -12,30 +12,30 @@
     <header>
       <h1 class="heading">Nasdaq Stock Price Checker</h1>
     </header>
-    <div id="formSection" style="margin-left: 5%">
+    <div id="formSection">
       <h3>Get single price and total likes</h3>
       <form id="singleForm" class="forms">
-        <input type="text" name="stock" placeholder="goog" style="width: 100px" required>
+        <input type="text" name="stock" placeholder="goog" required>
         <input type="checkbox" name="like" value="true"> Like?<br>
         <button type="submit">Get Price!</button>
       </form>
       <br>
       <h3>Compare and get relative likes</h3>
       <form id="doubleForm" class="forms">
-        <input type="text" name="stock" placeholder="goog" style="width: 100px" required>
-        <input type="text" name="stock" placeholder="msft" style="width: 100px" required>
+        <input type="text" name="stock" placeholder="goog" required>
+        <input type="text" name="stock" placeholder="msft" required>
         <input type="checkbox" name="like" value="true"> Like both?<br>
         <button type="submit">Get Price!</button>
       </form>
       <br>
       <div id="result">
-        <h3 style="margin-bottom: 10px">JSON Result</h3>
+        <h3>JSON Result</h3>
         <code id="jsonResult">fhfgh</code>
       </div>
     </div>
-    <hr style="margin: 20px">
+    <hr>
 
-    <div id="userstories" style="margin-left: 5%">
+    <div id="userstories">
       <h3 class="heading">User Stories</h3>
       <ol>
         <li>Get stock prices with <b>GET</b> <code>/api/stock-prices</code> and a Nasdaq <i>stock</i> ticker, and receive back an object <i>stockData</i>.</li>
@@ -54,7 +54,7 @@
       <code>{"stockData":{"stock":"GOOG","price":"786.90","likes":1}}</code><br>
       <code>{"stockData":[{"stock":"MSFT","price":"62.30","rel_likes":-1},{"stock":"GOOG","price":"786.90","rel_likes":1}]}</code>
     </div>
-    <hr style="margin: 20px">
+    <hr>
     
     <!-- Your web-app is https, so your scripts need to be too -->
     <script src="https://code.jquery.com/jquery-2.2.1.min.js"
@@ -75,7 +75,7 @@
               $('#jsonResult').text(JSON.stringify(data));
             })
             .fail (function(xhr) { 
-              $('#doubleForm')[0].reset();
+              $('#singleForm')[0].reset();
               $("#result").show();
               $('#jsonResult').text(xhr.responseJSON.error);
             });
